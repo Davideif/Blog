@@ -25,3 +25,27 @@
             });
         }
     }
+
+// GET api/posts/:id
+export async function GET(req, { params }) {
+  const { id } = await params;
+
+  await connectDB();
+
+  try {
+    const post = await Post.findById(id);
+
+    if (!post) {
+      return new Response(JSON.stringify({ message: "Post not found" }), {
+        status: 404,
+      });
+    }
+
+    return new Response(JSON.stringify(post), { status: 200 });
+
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Error fetching post", error }), {
+      status: 500,
+    });
+  }
+}
