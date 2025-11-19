@@ -3,7 +3,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', current: true },
-  { name: 'Posts', href: '/dashboard/posts', current: false },
+  { name: 'Blog', href: '/blog', current: true },
+  { name: 'Posts', href: '/dashboard/posts', current: true },
   { name: 'New Post', href: '/dashboard/posts/new', current: false },
   { name: 'Calendar', href: '#', current: false },
 ]
