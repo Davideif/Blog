@@ -1,15 +1,21 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
-export default function NewPostForm() {
+export default function PostForm({ post, postId }) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     content: "",
   });
 
-  // Update state when inputs change
+  // If editing, prefill the form
+  useEffect(() => {
+    if (post) {
+      setFormData({ title: post.title, content: post.content });
+    }
+  }, [post]);
+
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData({
@@ -18,13 +24,12 @@ export default function NewPostForm() {
     });
   }
 
-  // Handle form submission
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      const res = await fetch('/api/posts', {
-        method: 'POST',
+      const res = await fetch(postId ? `/api/posts/${postId}` : '/api/posts', {
+        method: postId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
@@ -37,12 +42,8 @@ export default function NewPostForm() {
         return;
       }
 
-      console.log("Post created:", data.post);
-       alert("New post created");
-       router.push('/');
-
-      // reset form
-      setFormData({ title: "", content: "" });
+      alert(postId ? "Post updated" : "New post created");
+      router.push('/');
 
     } catch (error) {
       console.error("Request failed:", error);
@@ -74,7 +75,7 @@ export default function NewPostForm() {
       /><br/>
 
       <button type="submit" disabled={!formData.title || !formData.content}>
-        Submit Post
+        {postId ? "Update Post" : "Submit Post"}
       </button>
     </form>
   );

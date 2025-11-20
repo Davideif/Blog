@@ -49,3 +49,32 @@ export async function GET(req, { params }) {
     });
   }
 }
+
+
+// PUT api/posts/:id
+
+import connectDB from "@/utils/connectDB";
+import Post from "@/models/Post";
+
+export async function PUT(req, { params }) {
+  const { id } = params;
+
+  await connectDB();
+
+  try {
+    const body = await req.json(); // parse request body
+
+    const updatedPost = await Post.findByIdAndUpdate(id, body, { new: true });
+
+    if (!updatedPost) {
+      return new Response(JSON.stringify({ error: "Post not found" }), { status: 404 });
+    }
+
+    return new Response(JSON.stringify(updatedPost), { status: 200 });
+  } catch (error) {
+    console.error("Failed to update the post", error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+}
+
+}
