@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const DeletePostButton = ({ postId }) => {
   const router = useRouter()
@@ -26,6 +27,7 @@ const DeletePostButton = ({ postId }) => {
     })
 
     if (res.ok) {
+      toast.success('Post deleted')
       router.refresh()
     } else {
       console.error("Delete failed")
