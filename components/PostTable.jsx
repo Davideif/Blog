@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 
 const PostTable = ({posts,renderActions}) => {
@@ -17,7 +18,7 @@ const PostTable = ({posts,renderActions}) => {
           {sortedPosts.map((post) => (
             <tr key={post._id}>
               <td style={{ border: "1px solid #ccc", padding: "8px" }}>
-                {post.title}
+                <Link href={`/dashboard/posts/${post._id}`}>{post.title}</Link>
               </td>
              <td style={{ border: "1px solid #ccc", padding: "8px" }}>
                 {new Date(post.createdAt).toLocaleString()}

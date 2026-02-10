@@ -1,12 +1,11 @@
 import React from 'react'
-import connectDB from '@/lib/mongodb'
 
 
-connectDB();
-
-const HomePage = () => {
+const HomePage = () => { 
   return (
-    <div><h1>Hello world!</h1></div>
+    <div className="flex items-center justify-center min-h-screen">
+      <h1>Hello world!</h1>
+    </div>
   )
 }
 

@@ -1,15 +1,21 @@
-import React from 'react'
-import PostPage from '@/components/PostPage'
+// app/posts/[id]/page.jsx
+import connectDB from '@/lib/mongodb';
+import PostModel from '@/models/Post';
+import Post from '@/components/Post';
 
-const SinglePostPage = async ({ params }) => {
-  const { id } = await params;
+export default async function PostPage({ params }) {
+  const resolvedParams = await params;
+  await connectDB();
+  const doc = await PostModel.findById(resolvedParams.id);
+  if (!doc) return <p>Not found</p>;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${id}`, {
-    cache: 'no-store'
-  });
-  const post = await res.json();
+  const post = {
+    _id: doc._id.toString(),
+    title: doc.title,
+    content: doc.content,
+    author: doc.author || null,
+    createdAt: doc.createdAt?.toISOString?.(),
+  };
 
-  return <PostPage post={post} />;
-};
-
-export default SinglePostPage;
+  return <Post post={post} />;
+}
