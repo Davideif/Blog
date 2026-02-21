@@ -7,7 +7,7 @@ const  Blog = async () => {
     const posts = await fetchPosts();
 
   return (
-    <PostTable posts={posts}/>
+    <PostTable posts={posts} linkBasePath="/blog"/>
   )
 }
 

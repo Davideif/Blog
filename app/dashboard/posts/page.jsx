@@ -10,6 +10,7 @@ const Posts = async () => {
     return (
   <PostTable
     posts={posts}
+    linkBasePath="/dashboard/posts"
     renderActions={(post) => (
       <DeletePostButton postId={post._id} />
     )}

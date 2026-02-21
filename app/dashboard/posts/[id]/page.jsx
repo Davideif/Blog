@@ -1,20 +1,18 @@
-// app/posts/[id]/page.jsx
-import connectDB from '@/lib/mongodb';
-import PostModel from '@/models/Post';
 import Post from '@/components/Post';
 
 export default async function PostPage({ params }) {
-  const resolvedParams = await params;
-  await connectDB();
-  const doc = await PostModel.findById(resolvedParams.id);
-  if (!doc) return <p>Not found</p>;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN || ''}/api/posts/${params.id}`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) return <p>Not found</p>;
+  const doc = await res.json();
 
   const post = {
-    _id: doc._id.toString(),
+    _id: doc._id,
     title: doc.title,
     content: doc.content,
     author: doc.author || null,
-    createdAt: doc.createdAt?.toISOString?.(),
+    createdAt: doc.createdAt,
   };
 
   return <Post post={post} />;
