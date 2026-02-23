@@ -1,18 +1,13 @@
 import Link from "next/link";
 import PostTable from "@/components/PostTable";
-import connectDB from "@/lib/mongodb";
-import Post from "@/models/Post";
 import DeletePostButton from "@/components/DeletePostButton";
-
+import { fetchPosts } from "@/lib/requests";
 
 export default async function DashboardPage() {
-  await connectDB();
 
+
+  const posts = await fetchPosts();
   
-  const postsData = await Post.find().sort({ createdAt: -1 });
-  
-  
-  const posts = JSON.parse(JSON.stringify(postsData));
 
   return (
     <div className="p-6">

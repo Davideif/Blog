@@ -1,13 +1,20 @@
 import React from 'react'
 import PostTable from '@/components/PostTable'
-import { fetchPosts } from '@/lib/requests'
+import connectDB from '@/lib/mongodb'
+import Post from '@/models/Post'
 
 const  Blog = async () => {
 
-    const posts = await fetchPosts();
+    await connectDB();
+    
+      
+      const postsData = await Post.find().sort({ createdAt: -1 });
+      
+      
+      const posts = JSON.parse(JSON.stringify(postsData));
 
   return (
-    <PostTable posts={posts} linkBasePath="/blog"/>
+    <PostTable posts={posts} linkBasePath="/blog" linkField="slug" />
   )
 }
 

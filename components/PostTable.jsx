@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react'
 
 
-const PostTable = ({ posts, renderActions, linkBasePath = "/dashboard/posts" }) => {
+const PostTable = ({ posts, renderActions, linkBasePath = "/dashboard/posts", linkField = "_id" }) => {
 
     const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));   
 
@@ -20,7 +20,7 @@ const PostTable = ({ posts, renderActions, linkBasePath = "/dashboard/posts" }) 
           {sortedPosts.map((post, idx) => (
             <tr key={post._id} className={idx % 2 === 0 ? "bg-gray-50 dark:bg-gray-700" : "bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-600 transition"}>
               <td className="px-4 py-3 border-b text-gray-900 dark:text-white">
-                <Link href={`${linkBasePath}/${post.slug || post._id}`} className="hover:underline font-medium">
+                <Link href={`${linkBasePath}/${post[linkField]}`} className="hover:underline font-medium">
                   {post.title}
                 </Link>
               </td>
