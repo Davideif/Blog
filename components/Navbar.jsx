@@ -1,6 +1,7 @@
 // components/Navbar.js
 import Link from "next/link";
 import { HomeIcon } from "@heroicons/react/16/solid";
+import SignOutButton from "/components/SignOutButton";
 
 export default function Navbar() {
   return (
@@ -24,7 +25,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Right: Search + Login */}
+        {/* Right: Search + Login + Log Out */}
         <div className="flex items-center gap-4">
           <input
             type="text"
@@ -37,6 +38,7 @@ export default function Navbar() {
           >
             Login
           </Link>
+          <SignOutButton />
         </div>
 
       </div>

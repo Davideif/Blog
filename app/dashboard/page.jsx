@@ -2,8 +2,17 @@ import Link from "next/link";
 import PostTable from "@/components/PostTable";
 import DeletePostButton from "@/components/DeletePostButton";
 import { fetchPosts } from "@/lib/requests";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
+  const session = await getServerSession(authOptions);
+
+
+  if (!session) {
+    redirect("/login");
+  }
 
 
   const posts = await fetchPosts();
