@@ -1,9 +1,16 @@
 // components/Navbar.js
 import Link from "next/link";
 import { HomeIcon } from "@heroicons/react/16/solid";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+
+
 import SignOutButton from "/components/SignOutButton";
 
-export default function Navbar() {
+export default async function Navbar() {
+
+    const session = await getServerSession(authOptions);
+
   return (
     <nav className="w-full bg-gray-600 border-b shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -32,13 +39,15 @@ export default function Navbar() {
             placeholder="Search..."
             className="border rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-gray-300"
           />
-          <Link 
+          {session ? (
+            <SignOutButton />
+          ) : (<Link 
             href="/login" 
             className="px-4 py-1 border rounded-lg hover:bg-gray-100"
           >
             Login
-          </Link>
-          <SignOutButton />
+          </Link>)}
+          
         </div>
 
       </div>

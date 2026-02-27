@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function PostForm({ post, postId }) {
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function PostForm({ post, postId }) {
         return;
       }
 
-      alert(postId ? "Post updated" : "New post created");
+      toast.success(postId ? "Post updated" : "New post created");
       router.push('/');
 
     } catch (error) {
