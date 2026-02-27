@@ -44,7 +44,7 @@ export async function POST(req) {
 export async function GET(req) {
   try {
     await connectDB();
-    const posts = await Post.find();
+    const posts = await Post.find({});
 
     return new Response(JSON.stringify(posts), {
       status: 200,

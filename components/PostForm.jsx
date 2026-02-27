@@ -28,7 +28,7 @@ export default function PostForm({ post, postId }) {
     event.preventDefault();
 
     try {
-      const res = await fetch(postId ? `/api/posts/${postId}` : '/api/posts', {
+      const res = await fetch(postId ? `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${postId}` : `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts`, {
         method: postId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

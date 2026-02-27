@@ -10,7 +10,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch("/api/sign-up", {
+    await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/sign-up`, {
       method: "POST",
       body: JSON.stringify(form),
     });

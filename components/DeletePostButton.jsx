@@ -22,7 +22,7 @@ const DeletePostButton = ({ postId }) => {
     }
 
     // 3. Actually delete the post
-    const res = await fetch(`/api/posts/${postId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${postId}`, {
       method: "DELETE",
     })
 

@@ -3,7 +3,10 @@ import { fetchPosts } from "@/lib/requests";
 import PostTable from "@/components/PostTable";
 import DeletePostButton from "@/components/DeletePostButton";
 
+export const dynamic = "force-dynamic";
+
 const Posts = async () => {
+
 
   const posts = await fetchPosts();
 
