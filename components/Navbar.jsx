@@ -3,9 +3,10 @@ import Link from "next/link";
 import { HomeIcon } from "@heroicons/react/16/solid";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
+import AuthSection from "@/components/AuthSection";
 
 
-import SignOutButton from "/components/SignOutButton";
+
 
 export default async function Navbar() {
 
@@ -39,15 +40,7 @@ export default async function Navbar() {
             placeholder="Search..."
             className="border rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-gray-300"
           />
-          {session ? (
-            <SignOutButton />
-          ) : (<Link 
-            href="/login" 
-            className="px-4 py-1 border rounded-lg hover:bg-gray-100"
-          >
-            Login
-          </Link>)}
-          
+          <AuthSection session={session} />
         </div>
 
       </div>

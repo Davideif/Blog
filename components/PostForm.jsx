@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import RichTextEditor from "@/components/RichTextEditor";
 
 export default function PostForm({ post, postId }) {
   const router = useRouter();
@@ -66,14 +67,13 @@ export default function PostForm({ post, postId }) {
       /><br /><br />
 
       <label htmlFor="content">Content:</label><br/>
-      <textarea
-        id="content"
-        name="content"
-        value={formData.content}
-        onChange={handleChange}
-        placeholder="Write your content here"
-        rows="5"
-      /><br/>
+      <RichTextEditor
+  value={formData.content}
+  onChange={(content) =>
+    setFormData({ ...formData, content })
+  }
+/>
+     
 
       <button type="submit" disabled={!formData.title || !formData.content}>
         {postId ? "Update Post" : "Submit Post"}

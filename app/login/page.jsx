@@ -3,11 +3,17 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function Login() {
+
+  
+
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,6 +25,7 @@ export default function Login() {
     });
 
     if (!res?.error) {
+      toast.success("Logged in successfully!");
       router.push("/dashboard");
     }
   };
