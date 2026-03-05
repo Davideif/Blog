@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import RichTextEditor from "@/components/RichTextEditor";
 
 export default function PostForm({ post, postId }) {
   const router = useRouter();
@@ -11,7 +10,6 @@ export default function PostForm({ post, postId }) {
     content: "",
   });
 
-  // If editing, prefill the form
   useEffect(() => {
     if (post) {
       setFormData({ title: post.title, content: post.content });
@@ -30,11 +28,16 @@ export default function PostForm({ post, postId }) {
     event.preventDefault();
 
     try {
-      const res = await fetch(postId ? `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${postId}` : `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts`, {
-        method: postId ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        postId
+          ? `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${postId}`
+          : `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts`,
+        {
+          method: postId ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 
@@ -46,7 +49,6 @@ export default function PostForm({ post, postId }) {
 
       toast.success(postId ? "Post updated" : "New post created");
       router.push('/');
-
     } catch (error) {
       console.error("Request failed:", error);
       alert("Failed to submit form.");
@@ -54,30 +56,54 @@ export default function PostForm({ post, postId }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="title">Title:</label><br />
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value={formData.title}
-        onChange={handleChange}
-        placeholder="Enter the title"
-        autoFocus
-      /><br /><br />
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-200">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+        {postId ? "Edit Post" : "Create New Post"}
+      </h2>
 
-      <label htmlFor="content">Content:</label><br/>
-      <RichTextEditor
-  value={formData.content}
-  onChange={(content) =>
-    setFormData({ ...formData, content })
-  }
-/>
-     
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="title" className="block text-gray-900 font-medium mb-2">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="Enter the title"
+            autoFocus
+            className="w-full px-4 py-2 border border-gray-300 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+          />
+        </div>
 
-      <button type="submit" disabled={!formData.title || !formData.content}>
-        {postId ? "Update Post" : "Submit Post"}
-      </button>
-    </form>
+        <div>
+          <label htmlFor="content" className="block text-gray-700 font-medium mb-2">
+            Content
+          </label>
+          <textarea
+            id="content"
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
+            placeholder="Enter the content"
+            rows={10}
+            className="w-full px-4 py-2 border text-gray-900 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition resize-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={!formData.title || !formData.content}
+          className={`w-full py-3 px-4 rounded-lg text-white font-semibold transition
+            ${formData.title && formData.content
+              ? "bg-blue-600 hover:bg-blue-700"
+              : "bg-gray-400 cursor-not-allowed"}`}
+        >
+          {postId ? "Update Post" : "Submit Post"}
+        </button>
+      </form>
+    </div>
   );
 }
