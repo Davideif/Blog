@@ -1,14 +1,18 @@
 import React from 'react'
 import HeroSection from '@/components/HeroSectiom';
+import LatestPosts from '@/components/LatestPosts';
+import connectDB from '@/lib/mongodb';
+import Post from '@/models/Post';
 
+const HomePage = async () => { 
+  await connectDB();
+  const posts = await Post.find().sort({ createdAt: -1 }).limit(3).lean();
 
-const HomePage = () => { 
   return (
     <>
        <HeroSection />
-    <div className="flex items-center justify-center min-h-screen">
-      <h1>Hello world!</h1>
-    </div>
+       <LatestPosts posts={posts} />
+    
     </>
  
   )
