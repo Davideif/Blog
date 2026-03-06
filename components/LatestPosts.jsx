@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import PostCard from "@/components/PostCard";
 
 const LatestPosts = ({ posts }) => {
@@ -15,6 +16,9 @@ const LatestPosts = ({ posts }) => {
           <PostCard key={post._id} post={post} />
         ))}
       </div>
+      <Link href="/blog" className="block text-center mt-10 text-blue-600 dark:text-blue-400 font-medium hover:underline">
+        View All Posts →
+      </Link>
     </section>
   );
 };

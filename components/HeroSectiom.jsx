@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="bg-linear-to-b from-gray-50 to-white py-28 px-6 text-center">
+    <section className="bg-linear-to-b from-gray-50 to-white py-16 px-6 text-center">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900">
           Welcome to My Blog
@@ -12,6 +13,9 @@ const HeroSection = () => {
           Sets of notes about web development and more
         </p>
       </div>
+      <Link href="/blog" className="mt-10 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition">
+        Explore the Blog
+      </Link>
     </section>
   );
 };
