@@ -35,11 +35,11 @@ export default async function Navbar() {
 
         {/* Right: Search + Login + Log Out */}
         <div className="flex items-center gap-4">
-          <input
+          {/* <input
             type="text"
             placeholder="Search..."
             className="border rounded-lg px-3 py-1 focus:outline-none focus:ring focus:ring-gray-300"
-          />
+          /> */}
           <AuthSection session={session} />
         </div>
 

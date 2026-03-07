@@ -1,2 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.ProseMirror {
+  min-height: 200px;
+  outline: none;
+}
+
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ProseMirror ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.ProseMirror ol {
+  list-style: decimal;
+  padding-left: 20px;
+}

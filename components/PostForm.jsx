@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import TiptapEditor from "@/components/Tiptap-editor";
 import { toast } from 'react-toastify';
 
 export default function PostForm({ post, postId }) {
@@ -82,15 +83,17 @@ export default function PostForm({ post, postId }) {
           <label htmlFor="content" className="block text-gray-700 font-medium mb-2">
             Content
           </label>
-          <textarea
-            id="content"
-            name="content"
-            value={formData.content}
-            onChange={handleChange}
-            placeholder="Enter the content"
-            rows={10}
-            className="w-full px-4 py-2 border text-gray-900 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition resize-none"
-          />
+          <div className="max-w-3xl mx-auto mt-10">
+      <TiptapEditor
+    value={formData.content}
+    onChange={(html) =>
+      setFormData({
+        ...formData,
+        content: html,
+      })
+    }
+  />
+    </div>
         </div>
 
         <button

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import RichText from '@/components/RichText';
 
 const Post = ({ post }) => {
   if (!post) return null;
@@ -10,7 +10,7 @@ const Post = ({ post }) => {
         {post.author} • {new Date(post.createdAt).toLocaleString()}
       </p>
       <div className="text-gray-800 dark:text-gray-200 leading-relaxed">
-        {post.content}
+        <RichText content={post.content} />
       </div>
     </article>
   );

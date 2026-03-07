@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import RichText from "@/components/RichText";
 
 const PostCard = ({ post }) => {
   if (!post) return null;
@@ -14,9 +15,7 @@ const PostCard = ({ post }) => {
         {post.author} • {new Date(post.createdAt).toLocaleDateString()}
       </p>
 
-      <p className="text-gray-700 dark:text-gray-300 line-clamp-3 mb-4">
-        {post.content}
-      </p>
+      <RichText content={post.content} preview />
       <Link
   href={`/blog/${post.slug}`}
   className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
