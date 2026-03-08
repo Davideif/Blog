@@ -1,5 +1,5 @@
 import React from 'react'
-import RichText from '@/components/RichText';
+import { RichText } from "@/components/rich-text-editor";
 
 const Post = ({ post }) => {
   if (!post) return null;

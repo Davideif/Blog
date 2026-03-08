@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import RichText from "@/components/RichText";
+import { RichText } from "@/components/rich-text-editor";
 
 const PostCard = ({ post }) => {
   if (!post) return null;

@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 const RootLayout = ({children}) => {
   return (
 <AuthProvider>
-<html>
+<html className="dark">
 <body>
 <ToastContainer/>    
 <Navbar/>

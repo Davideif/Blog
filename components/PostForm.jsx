@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import TiptapEditor from "@/components/Tiptap-editor";
+import { TiptapEditor} from "@/components/rich-text-editor";
 import { toast } from 'react-toastify';
 
 export default function PostForm({ post, postId }) {
