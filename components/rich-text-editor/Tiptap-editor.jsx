@@ -85,7 +85,7 @@ export default function TiptapEditor({ value, onChange }) {
     <div className="border border-gray-300 rounded-lg overflow-hidden">
       
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-2 p-2 border-b bg-gray-900">
+      <div className="flex flex-wrap gap-2 p-2 border-b bg-green-900">
         {buttons.map((btn) => (
           <ToolbarButton
             key={btn.label}
