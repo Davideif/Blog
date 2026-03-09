@@ -25,12 +25,15 @@ export default function Login() {
       redirect: false,
     });
 
-    if (!res?.error) {
-      toast.success("Logged in successfully!");
-      router.push("/dashboard");
-    }
-  };
+    
+  if (res?.error) {
+    toast.error("Invalid email or password");
+    return;
+  }
 
+  toast.success("Logged in successfully!");
+  router.push("/dashboard");
+  };
 
 return (
   <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
