@@ -5,6 +5,7 @@ import { fetchPosts } from "@/lib/requests";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
+import Pagination from "@/components/Pagination";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -15,7 +16,7 @@ export default async function DashboardPage() {
   }
 
 
-  const posts = await fetchPosts();
+  const data = await fetchPosts(1);
   
 
   return (
@@ -24,7 +25,7 @@ export default async function DashboardPage() {
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
       {/* Pass the posts and a function to render action buttons */}
       <PostTable 
-        posts={posts}
+        posts={data.posts}
         renderActions={(post) => (
           <div className="flex gap-2">
             <Link href={`/dashboard/posts/${post._id}/edit`}>Edit</Link>
@@ -42,6 +43,7 @@ export default async function DashboardPage() {
       >
         New Post
       </Link>
+       <Pagination currentPage={data.page} totalPages={data.totalPages} />
     </div>
   );
 }

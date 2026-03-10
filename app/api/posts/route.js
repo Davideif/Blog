@@ -40,26 +40,27 @@ export async function POST(req) {
     }
 }
 
-// GET /api/posts
+// GET /api/posts?page=1&limit=10
 export async function GET(req) {
-  try {
-    await connectDB();
-    const posts = await Post.find({});
+  const { searchParams } = new URL(req.url);
 
-    return new Response(JSON.stringify(posts), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    });
+  const page = parseInt(searchParams.get("page")) || 1;
+  const limit = parseInt(searchParams.get("limit")) || 10;
 
-  } catch (error) {
-    console.error("Failed to fetch posts:", error);
+  const skip = (page - 1) * limit;
 
-    return new Response(
-      JSON.stringify({ error: "Failed to fetch posts" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" }
-      }
-    );
-  }
+  const posts = await Post.find()
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+  const total = await Post.countDocuments();
+
+  return Response.json({
+    posts,
+    page,
+    totalPages: Math.ceil(total / limit),
+    totalPosts: total,
+  });
 }
+
