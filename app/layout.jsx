@@ -5,6 +5,7 @@ import  {ToastContainer} from 'react-toastify';
 
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const RootLayout = ({children}) => {
   return (
@@ -14,6 +15,7 @@ const RootLayout = ({children}) => {
 <ToastContainer/>    
 <Navbar/>
 {children}
+<Footer/>
 </body>
 </html>
 </AuthProvider>
