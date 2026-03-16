@@ -16,5 +16,6 @@ export default async function EditPostPage({ params }) {
 
   const post = JSON.parse(JSON.stringify(postDoc));
 
-  return <PostForm post={post} postId={id} />
+
+  return <PostForm post={post} postId={post._id} />
 }

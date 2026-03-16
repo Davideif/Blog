@@ -1,30 +1,22 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from 'next/navigation';
-import { TiptapEditor} from "@/components/rich-text-editor";
+import { TiptapEditor } from "@/components/rich-text-editor";
 import { toast } from 'react-toastify';
-
 
 export default function PostForm({ post, postId }) {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    title: "",
-    content: "",
+    title: post?.title || "",
+    content: post?.content || "",
   });
-
-
-  useEffect(() => {
-    if (post) {
-      setFormData({ title: post.title, content: post.content });
-    }
-  }, [post]);
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   }
 
   async function handleSubmit(event) {
@@ -38,7 +30,7 @@ export default function PostForm({ post, postId }) {
         {
           method: postId ? 'PUT' : 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...formData})
+          body: JSON.stringify({ ...formData })
         }
       );
 
@@ -86,16 +78,16 @@ export default function PostForm({ post, postId }) {
             Content
           </label>
           <div className="max-w-3xl mx-auto mt-10">
-      <TiptapEditor
-    value={formData.content}
-    onChange={(html) =>
-      setFormData({
-        ...formData,
-        content: html,
-      })
-    }
-  />
-    </div>
+            <TiptapEditor
+              value={formData.content}
+              onChange={(html) =>
+                setFormData(prev => ({
+                  ...prev,
+                  content: html,
+                }))
+              }
+            />
+          </div>
         </div>
 
         <button
