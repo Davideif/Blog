@@ -11,17 +11,13 @@ export default async function PostPage({ params }) {
 
   if (!res.ok) return <p>Not found</p>;
 
-  const doc = await res.json();
+  const post = await res.json();
+
+
 
   return (
     <Post
-      post={{
-        _id: doc._id,
-        title: doc.title,
-        content: doc.content,
-        author: doc.author || null,
-        createdAt: doc.createdAt,
-      }}
+      post={post}
     />
   );
 }

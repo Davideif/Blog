@@ -10,6 +10,12 @@ const postSchema = new Schema(
       required: true,
       trim: true,
     },
+     author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+   
     slug: {
       type: String,
       unique: true,

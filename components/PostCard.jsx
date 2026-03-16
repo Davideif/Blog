@@ -12,7 +12,7 @@ const PostCard = ({ post }) => {
       </h3>
 
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-        {post.author} • {new Date(post.createdAt).toLocaleDateString()}
+        {post.author?.email} • {new Date(post.createdAt).toLocaleDateString()}
       </p>
 
       <RichText content={post.content} preview />

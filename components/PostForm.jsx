@@ -4,12 +4,14 @@ import { useRouter } from 'next/navigation';
 import { TiptapEditor} from "@/components/rich-text-editor";
 import { toast } from 'react-toastify';
 
+
 export default function PostForm({ post, postId }) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     content: "",
   });
+
 
   useEffect(() => {
     if (post) {
@@ -36,7 +38,7 @@ export default function PostForm({ post, postId }) {
         {
           method: postId ? 'PUT' : 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ ...formData})
         }
       );
 

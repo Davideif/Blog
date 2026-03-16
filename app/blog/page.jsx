@@ -17,6 +17,7 @@ const Blog = async ({ searchParams }) => {
 
   const posts = await Post.find()
     .sort({ createdAt: -1 })
+    .populate("author", "email")
     .skip(skip)
     .limit(limit)
     .lean();

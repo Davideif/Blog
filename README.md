@@ -6,6 +6,16 @@ A full-stack Blog Content Management System built with **Next.js** that allows u
 
 https://blogcms-mocha.vercel.app/
 
+Demo Accounts
+
+Admin account
+Email: admin@gmail.com
+Password: admin
+
+User account
+Email: test@gmail.com
+Password: test
+
 ## GitHub Repository
 
 https://github.com/Davideif/Blog

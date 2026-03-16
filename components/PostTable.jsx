@@ -27,6 +27,11 @@ const PostTable = ({
                 Date
               </th>
 
+               <th className="px-6 py-4 text-left font-semibold text-gray-700 dark:text-gray-200 tracking-wide">
+                Author
+              </th>
+
+
               {renderActions && (
                 <th className="px-6 py-4 text-right font-semibold text-gray-700 dark:text-gray-200 tracking-wide">
                   Actions
@@ -55,6 +60,11 @@ const PostTable = ({
                 {/* Date */}
                 <td className="px-6 py-4 text-gray-500 dark:text-gray-400">
                   {new Date(post.createdAt).toLocaleString()}
+                </td>
+
+                 {/* Author */}
+                <td className="px-6 py-4 text-gray-500 dark:text-gray-400">
+                  {post.author?.email || "Unknown"}
                 </td>
 
                 {/* Actions */}
