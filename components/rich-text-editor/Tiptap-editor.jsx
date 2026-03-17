@@ -37,11 +37,31 @@ export default function TiptapEditor({ value, onChange }) {
   if (!editor) return null;
 
   const addImage = () => {
-    const url = window.prompt("Enter image URL");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+
+  input.onchange = async () => {
+    const file = input.files[0];
+
+    const formData = new FormData();
+    console.log(formData);
+    formData.append("file", file);
+
+    
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    editor.chain().focus().setImage({ src: data.url }).run();
   };
+
+  input.click();
+};
 
   const buttons = [
     {
