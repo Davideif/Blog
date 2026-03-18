@@ -12,7 +12,7 @@ export default async function BlogPostPage({ params }) {
     _id: doc._id.toString(),
     title: doc.title,
     content: doc.content,
-    author: doc.author?.email || null,
+    author: doc.author || null,
     createdAt: doc.createdAt?.toISOString?.(),
   };
 

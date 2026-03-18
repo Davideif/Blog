@@ -7,6 +7,7 @@ import { authOptions } from "@/lib/authOptions";
 import { redirect } from "next/navigation";
 import Pagination from "@/components/Pagination";
 
+
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 

@@ -6,7 +6,7 @@ import Post from '@/models/Post';
 
 const HomePage = async () => { 
   await connectDB();
-  const posts = await Post.find().sort({ createdAt: -1 }).limit(3).lean();
+  const posts = await Post.find().populate('author', 'email').sort({ createdAt: -1 }).limit(3).lean();
 
   return (
     <>

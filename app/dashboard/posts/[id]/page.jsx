@@ -12,6 +12,14 @@ export default async function PostPage({ params }) {
   if (!res.ok) return <p>Not found</p>;
 
   const post = await res.json();
+  
+
+return (
+  <Post
+    post={post}       
+  />  
+);
+
 
 
 

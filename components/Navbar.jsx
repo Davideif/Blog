@@ -29,7 +29,7 @@ export default async function Navbar() {
           <div className="hidden md:flex items-center gap-6 text-gray-800">
             <Link href="/" className=" hover:text-black">Home</Link>
             <Link href="/blog" className="hover:text-black">Blog</Link>
-            {session && <Link href="/dashboard" className="hover:text-black">Dashboard</Link>}
+            {session && <Link href="/dashboard" className="hover:text-black ">Dashboard</Link>}
           </div>
         </div>
 
