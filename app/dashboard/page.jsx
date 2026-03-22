@@ -23,7 +23,7 @@ export default async function DashboardPage() {
   return (
     <div className="p-6">
      
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <h1 className="text-3xl font-heading mb-6">Dashboard</h1>
       {/* Pass the posts and a function to render action buttons */}
       <PostTable 
         posts={data.posts}
@@ -39,11 +39,11 @@ export default async function DashboardPage() {
 
       {/* New Post Button */}
       <Link
-        href="/dashboard/posts/new"
-        className="inline-block px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
-      >
-        New Post
-      </Link>
+  href="/dashboard/posts/new"
+  className="inline-block px-4 py-2 bg-brand-500 text-white font-medium rounded-lg hover:bg-brand-600 transition-colors"
+>
+  New Post
+</Link>
        <Pagination currentPage={data.page} totalPages={data.totalPages} />
     </div>
   );

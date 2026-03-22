@@ -7,7 +7,8 @@ const LatestPosts = ({ posts }) => {
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold text-center mb-10">
+
+      <h2 className="text-3xl font-bold text-text-primary text-center mb-10">
         Latest Posts
       </h2>
 
@@ -16,9 +17,14 @@ const LatestPosts = ({ posts }) => {
           <PostCard key={post._id} post={post} />
         ))}
       </div>
-      <Link href="/blog" className="block text-center mt-10 text-blue-600 dark:text-blue-400 font-medium hover:underline">
+
+      <Link
+        href="/blog"
+        className="block text-center mt-10 text-brand-500 font-medium hover:text-brand-600 hover:underline transition-colors"
+      >
         View All Posts →
       </Link>
+
     </section>
   );
 };

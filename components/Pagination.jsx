@@ -4,32 +4,27 @@ const Pagination = ({ currentPage, totalPages }) => {
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
 
+  const baseClasses = "px-3 py-1 rounded border border-border text-sm font-medium text-text-primary hover:bg-surface-muted transition-colors";
+  const activeClasses = "bg-brand-500 text-white border-brand-500 hover:bg-brand-600";
+
   return (
     <div className="flex items-center justify-center gap-2 mt-6">
 
       {/* Previous */}
       {currentPage > 1 && (
-        <Link
-          href={`?page=${prevPage}`}
-          className="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          Prev
+        <Link href={`?page=${prevPage}`} className={baseClasses}>
+          ← Prev
         </Link>
       )}
 
       {/* Page numbers */}
       {Array.from({ length: totalPages }, (_, i) => {
         const page = i + 1;
-
         return (
           <Link
             key={page}
             href={`?page=${page}`}
-            className={`px-3 py-1 rounded border ${
-              page === currentPage
-                ? "bg-blue-600 text-white"
-                : "hover:bg-gray-100"
-            }`}
+            className={`${baseClasses} ${page === currentPage ? activeClasses : ""}`}
           >
             {page}
           </Link>
@@ -38,11 +33,8 @@ const Pagination = ({ currentPage, totalPages }) => {
 
       {/* Next */}
       {currentPage < totalPages && (
-        <Link
-          href={`?page=${nextPage}`}
-          className="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          Next
+        <Link href={`?page=${nextPage}`} className={baseClasses}>
+          Next →
         </Link>
       )}
 

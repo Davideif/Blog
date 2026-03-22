@@ -10,7 +10,12 @@ const EditPostButton = () => {
   }
 
   return (
-    <button onClick={handleEdit}>Edit</button>
+    <button
+    onClick={handleEdit}
+    className="px-4 py-1.5 rounded-lg border border-border text-text-primary text-sm font-medium hover:bg-surface-muted transition-colors cursor-pointer"
+  >
+    Edit
+  </button>
   )
 }
 

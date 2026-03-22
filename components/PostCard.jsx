@@ -6,22 +6,23 @@ const PostCard = ({ post }) => {
   if (!post) return null;
 
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 hover:shadow-lg transition">
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+    <div className="bg-surface border border-border rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+      
+      <h3 className="text-xl font-bold text-text-primary mb-2">
         {post.title}
       </h3>
 
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+      <p className="text-sm text-text-muted mb-3">
         {post.author?.email} • {new Date(post.createdAt).toLocaleDateString()}
       </p>
 
-      <RichText content={post.content} preview />
-      <Link
-  href={`/blog/${post.slug}`}
-  className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
->
-  Read more →
-</Link>
+      <div className="mb-4 text-text-muted text-sm line-clamp-3">
+        <RichText content={post.content} preview />
+      </div>
+
+      <Link href={`/blog/${post.slug}`} className="text-brand-500 font-medium hover:text-brand-600 hover:underline transition-colors">
+        Read more →
+      </Link>
 
     </div>
   );

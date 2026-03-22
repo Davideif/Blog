@@ -102,30 +102,27 @@ export default function TiptapEditor({ value, onChange }) {
   ];
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden">
-      
-      {/* Toolbar */}
-      <div className="flex flex-wrap gap-2 p-2 border-b bg-green-900">
-        {buttons.map((btn) => (
-          <ToolbarButton
-            key={btn.label}
-            onClick={btn.command}
-            isActive={btn.active()}
-          >
-            {btn.label}
-          </ToolbarButton>
-        ))}
+    <div className="border border-border rounded-lg overflow-hidden">
 
-        <ToolbarButton onClick={addImage}>
-          Image
-        </ToolbarButton>
-      </div>
+  {/* Toolbar */}
+  <div className="flex flex-wrap gap-2 p-2 border-b border-border bg-surface-muted">
+    {buttons.map((btn) => (
+      <ToolbarButton
+        key={btn.label}
+        onClick={btn.command}
+        isActive={btn.active()}
+      >
+        {btn.label}
+      </ToolbarButton>
+    ))}
+    <ToolbarButton onClick={addImage}>Image</ToolbarButton>
+  </div>
 
-      {/* Editor */}
-      <div className="p-4 min-h-[200px] text-gray-900">
-        <EditorContent editor={editor} />
-      </div>
+  {/* Editor */}
+  <div className="p-4 min-h-[200px] bg-surface text-text-primary">
+    <EditorContent editor={editor} />
+  </div>
 
-    </div>
+</div>
   );
 }

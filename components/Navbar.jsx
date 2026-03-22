@@ -9,32 +9,33 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className="w-full bg-gray-600 border-b shadow-sm relative">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        
-        {/* Left */}
-        <div className="px-4 flex items-center gap-10">
-          <Link href="/">
-            <HomeIcon className="w-10 cursor-pointer" />
-          </Link>
+    <nav className="w-full bg-surface border-b border-border shadow-sm relative">
+  <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-6 text-gray-800">
-            <Link href="/">Home</Link>
-            <Link href="/blog">Blog</Link>
-            {session && <Link href="/dashboard">Dashboard</Link>}
-          </div>
-        </div>
+    {/* Left */}
+    <div className="flex items-center gap-10">
+      <Link href="/">
+        <HomeIcon className="w-6 h-6 text-text-primary cursor-pointer hover:text-brand-500 transition-colors" />
+      </Link>
 
-        {/* Right */}
-        <div className="flex items-center gap-4">
-          <AuthSection session={session} />
-
-          {/*  Mobile Menu */}
-          <Burger session={session} />
-        </div>
-
+      {/* Desktop links */}
+      <div className="hidden md:flex items-center gap-6 font-medium">
+        <Link href="/" className="text-text-primary hover:text-brand-500 transition-colors">Home</Link>
+        <Link href="/blog" className="text-text-primary hover:text-brand-500 transition-colors">Blog</Link>
+        {session && (
+          <Link href="/dashboard" className="text-text-primary hover:text-brand-500 transition-colors">Dashboard</Link>
+        )}
       </div>
-    </nav>
+    </div>
+
+    {/* Right */}
+    <div className="flex items-center gap-4">
+      <AuthSection session={session} />
+      <Burger session={session} />
+    </div>
+
+  </div>
+</nav>
+   
   );
 }

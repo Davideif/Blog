@@ -35,9 +35,12 @@ const DeletePostButton = ({ postId }) => {
   }
 
   return (
-    <button onClick={handleDelete}>
-      Delete
-    </button>
+   <button
+    onClick={handleDelete}
+    className="px-3 py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-600 text-sm font-medium hover:bg-red-100 hover:border-red-300 transition-colors cursor-pointer"
+  >
+    Delete
+  </button>
   )
 }
 

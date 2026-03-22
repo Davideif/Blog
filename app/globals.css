@@ -1,5 +1,34 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "@tailwindcss/typography";
+
+
+
+@theme {
+  /* ── Colours ── */
+  --color-brand-50: #f0f9ff;
+  --color-brand-500: #B1AAAA;
+  --color-brand-600: #6D6464;
+  --color-brand-900: #0c4a6e;
+
+  --color-border: #e2e8f0;
+
+  --color-surface: #F7F7EB;
+  --color-surface-muted: #C0C2AB;
+  --color-text-primary: #0f172a;
+  --color-text-muted: #64748b;
+  
+
+  /* ── Typography ── */
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Cal Sans', sans-serif;
+
+
+  /* ── Radius ── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
 
 .ProseMirror {
   min-height: 200px;
