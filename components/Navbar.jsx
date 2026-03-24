@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import AuthSection from "@/components/AuthSection";
 import Burger from "@/components/Burger";
+import SearchBar from "@/components/SearchBar";
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
@@ -26,6 +27,11 @@ export default async function Navbar() {
           <Link href="/dashboard" className="text-text-primary hover:text-brand-500 transition-colors">Dashboard</Link>
         )}
       </div>
+    </div>
+
+    {/* SearchBar */}
+    <div className="hidden md:block">
+      <SearchBar />
     </div>
 
     {/* Right */}
