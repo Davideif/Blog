@@ -30,7 +30,7 @@ export default async function DashboardPage() {
         renderActions={(post) => (
           <div className="flex gap-2">
             <Link href={`/dashboard/posts/${post._id}/edit`}>Edit</Link>
-            <DeletePostButton postId={post._id} />
+            <DeletePostButton postId={post._id.toString()} />
     </div>
   )}
 />

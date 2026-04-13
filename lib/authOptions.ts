@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
         const isValid = await bcrypt.compare(credentials.password, user.password);
         if (!isValid) throw new Error("Wrong password");
 
-        return { id: user._id.toString(), email: user.email, name: user.name ,role: user.role};
+        return { id: user._id.toString(), email: user.email, name: user.name ,role: user.role ?? "user"};
       },
     }),
   ],
@@ -39,8 +39,8 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+        session.user.id = token.id ?? "";
+        session.user.role = token.role ?? "user";
       }   return session;    
     },
   },  
