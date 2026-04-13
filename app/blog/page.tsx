@@ -2,7 +2,7 @@ import React from "react";
 import PostTable from "@/components/PostTable";
 import Pagination from "@/components/Pagination";
 import connectDB from "@/lib/mongodb";
-import Post, { IPost, IPostPopulated } from "@/models/Post";
+import Post, { IPostPopulated } from "@/models/Post";
 
 const Blog = async ({ searchParams  } : {searchParams: Promise<{ page?: string; limit?: string; }> }) => {
 

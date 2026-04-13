@@ -1,4 +1,4 @@
-import PostModel from '@/models/Post'; 
+import PostModel, { IPostPopulated } from '@/models/Post'; 
 import connectDB from '@/lib/mongodb';  
 import Post from '@/components/Post';
 
@@ -12,9 +12,10 @@ export default async function BlogPostPage({ params}: {params: Promise<{slug: st
     _id: doc._id.toString(),
     title: doc.title,
     content: doc.content,
+    slug: doc.slug,
     author: doc.author || null,
     createdAt: doc.createdAt?.toISOString?.(),
-  };
+  } as unknown as IPostPopulated;
 
   return <Post post={post} />;
 }
