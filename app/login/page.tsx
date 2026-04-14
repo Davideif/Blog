@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
+
 export default function Login() {
 
   
@@ -13,11 +14,13 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   
   
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const res = await signIn("credentials", {
       email,
@@ -28,6 +31,7 @@ export default function Login() {
     
   if (res?.error) {
     toast.error("Invalid email or password");
+    setLoading(false);
     return;
   }
 
@@ -72,9 +76,10 @@ return (
 
     <button
       type="submit"
-      className="w-full bg-brand-500 text-white py-2.5 rounded-lg font-medium hover:bg-brand-600 active:scale-[0.98] transition-all"
+      disabled={loading}
+      className="w-full bg-brand-500 text-white py-2.5 rounded-lg font-medium hover:bg-brand-600 active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      Login
+      {loading ? "Logging in..." : "Login" }
     </button>
 
     <p className="text-center text-sm text-text-muted">

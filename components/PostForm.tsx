@@ -6,8 +6,10 @@ import { toast } from 'react-toastify';
 import { IPostPopulated } from "@/models/Post";
 
 
+
 export default function PostForm({ post, postId }: { post?: IPostPopulated; postId?: string }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: post?.title || "",
     content: post?.content || "",
@@ -23,6 +25,7 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
+    setLoading(true);
 
     try {
       const res = await fetch(
@@ -39,6 +42,7 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
       const data = await res.json();
 
       if (!res.ok) {
+        setLoading(false);
         console.error("Error:", data.message);
         alert("Error: " + data.message);
         return;
@@ -47,6 +51,7 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
       toast.success(postId ? "Post updated" : "New post created");
       router.push('/');
     } catch (error) {
+      setLoading(false);
       console.error("Request failed:", error);
       alert("Failed to submit form.");
     }
@@ -90,10 +95,10 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
 
     <button
       type="submit"
-      disabled={!formData.title || !formData.content}
+      disabled={!formData.title || !formData.content || loading}
       className="w-full py-3 px-4 rounded-lg text-white font-semibold transition-colors bg-brand-500 hover:bg-brand-600 disabled:bg-border disabled:text-text-muted disabled:cursor-not-allowed"
     >
-      {postId ? "Update Post" : "Submit Post"}
+      {loading ? "Submitting..." : postId ? "Update Post" : "Submit Post"}
     </button>
 
   </form>
