@@ -44,7 +44,7 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
       if (!res.ok) {
         setLoading(false);
         console.error("Error:", data.message);
-        alert("Error: " + data.message);
+        toast.error("Error: " + data.message);
         return;
       }
 
@@ -53,7 +53,7 @@ export default function PostForm({ post, postId }: { post?: IPostPopulated; post
     } catch (error) {
       setLoading(false);
       console.error("Request failed:", error);
-      alert("Failed to submit form.");
+      toast.error("Failed to submit form.");
     }
   }
 
