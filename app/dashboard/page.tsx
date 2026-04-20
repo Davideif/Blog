@@ -26,13 +26,21 @@ export default async function DashboardPage() {
       <h1 className="text-3xl font-heading mb-6">Dashboard</h1>
       {/* Pass the posts and a function to render action buttons */}
       <PostTable 
-        posts={data.posts}
-        renderActions={(post) => (
-          <div className="flex gap-2">
-            <Link href={`/dashboard/posts/${post._id}/edit`}>Edit</Link>
-            <DeletePostButton postId={post._id.toString()} />
-    </div>
-  )}
+  posts={data.posts}
+  renderActions={(post) => {
+    const isOwner = session?.user?.id === post.author?._id?.toString();
+    const isAdmin = session?.user?.role === "admin";
+    const canEdit = isOwner || isAdmin;
+
+    if (!canEdit) return null;
+
+    return (
+      <div className="flex gap-2">
+        <Link href={`/dashboard/posts/${post._id}/edit`}>Edit</Link>
+        <DeletePostButton postId={post._id.toString()} />
+      </div>
+    );
+  }}
 />
 
 
