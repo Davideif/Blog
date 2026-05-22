@@ -4,6 +4,7 @@ import Post from "@/models/Post";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
+
 // POST /api/posts
 export async function POST(req: NextRequest) {
 
@@ -48,6 +49,7 @@ export async function POST(req: NextRequest) {
       content: content.trim(),
       author: session.user.id,
     });
+      
 
     return NextResponse.json(
       { message: "Post created successfully", post: newPost },
@@ -82,61 +84,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { message: "Failed to create post" },
       { status: 500 }
-    );
-  }
-}
-
-// GET /api/posts?page=1&limit=10
-export async function GET(req: NextRequest) {
-
-  
-  const { searchParams } = new URL(req.url);
-
-  const pageParam = parseInt(searchParams.get("page") ?? "1");
-  const limitParam = parseInt(searchParams.get("limit") ?? "10");
-
-  if (Number.isNaN(pageParam) || Number.isNaN(limitParam)) {
-    return NextResponse.json(
-      { message: "Page and limit must be valid numbers." },
-      { status: 400 } // 400 = caller's fault, bad input
-    );
-  }
-
-  const page = Math.max(1, pageParam);
-  const limit = Math.min(15, Math.max(1, limitParam));
-  const skip = (page - 1) * limit;
-
-
- 
-  try {
-    await connectDB();
-
-    const [posts, total] = await Promise.all([
-      Post.find()
-        .populate("author", "email")
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .lean(),
-      Post.countDocuments(),
-    ]);
-
-    return NextResponse.json({
-      posts,
-      page,
-      totalPages: Math.ceil(total / limit),
-      totalPosts: total,
-    });
-
-  } catch (error) {
-    
-    console.error("[GET /api/posts]", error);
-
-    
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    return NextResponse.json(
-      { message: "Failed to fetch posts", error: errorMessage },
-      { status: 500 } 
     );
   }
 }

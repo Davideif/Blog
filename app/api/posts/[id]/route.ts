@@ -6,36 +6,6 @@ import { authOptions } from "@/lib/authOptions";
 import { NextRequest,NextResponse } from "next/server";
 
 
-// GET /api/posts/:id
-export async function GET(req: NextRequest, { params } : { params: Promise<{ id: string }> }) {
-  
-  const { id } = await params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return NextResponse.json({ message: "Invalid post ID" }, {  
-      status: 400,
-    });
-  }
-  
-  try {
-     await connectDB();
-    const post = await Post.findById(id).populate("author", "email").lean();
-
-    if (!post) {
-      return NextResponse.json({ message: "Post not found" }, {
-        status: 404,
-      });
-    }
-
-    return NextResponse.json(post, { status: 200 });
-   
-
-  } catch (error) {
-    console.error("[GET /api/posts/:id]", error);
-    return NextResponse.json({ message: "Error fetching post"}, { status: 500 });
-  }
-}
-
-
 // PUT /api/posts/:id
 export async function PUT(req: NextRequest, { params } : { params: Promise<{ id: string }> }) {
   const { id } = await params;

@@ -1,23 +1,14 @@
-import Post from '@/components/Post';
+import connectDB from "@/lib/mongodb";
+import Post from "@/models/Post";
+import PostComponent from "@/components/Post";
 
-export default async function PostPage({ params }: { params: Promise<{ id: string }> })  {
-
+export default async function PostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_DOMAIN}/posts/${id}`,
-    { cache: 'no-store' }
-  );
+  await connectDB();
+  const post = await Post.findById(id).lean();
 
-  if (!res.ok) return <p>Not found</p>;
+  if (!post) return <p>Not found</p>;
 
-  const post = await res.json();
-  
-
-return (
-  <Post
-    post={post}       
-  />  
-);
-
+  return <PostComponent post={JSON.parse(JSON.stringify(post))} />;
 }
